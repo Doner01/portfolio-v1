@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* -------------------------------------------------------------
- * 1. Three.js Space Engine (Black Hole & Right Ringed Planet)
+ * 1. Three.js Space Engine
  * ------------------------------------------------------------- */
 function initStolasSpaceScene() {
   const container = document.getElementById("three-canvas-container");
@@ -24,22 +24,16 @@ function initStolasSpaceScene() {
   const worldGroup = new THREE.Group();
   scene.add(worldGroup);
 
-  /* =============================================================
-   * (1) 3D KOSMIK QORA TUYNUK (Top-Right Black Hole)
-   * ============================================================= */
+  // 1. 3D Qora Tuynuk (Top-Right Black Hole)
   const blackHoleGroup = new THREE.Group();
-  blackHoleGroup.position.set(4.8, 2.8, -4.5); // O'ng yuqori qismda
+  blackHoleGroup.position.set(4.8, 2.8, -4.5);
   worldGroup.add(blackHoleGroup);
 
-  // Hodisalar gorizonti (Event Horizon)
   const eventHorizonGeo = new THREE.SphereGeometry(1.25, 32, 32);
-  const eventHorizonMat = new THREE.MeshBasicMaterial({
-    color: 0x000000
-  });
+  const eventHorizonMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
   const eventHorizon = new THREE.Mesh(eventHorizonGeo, eventHorizonMat);
   blackHoleGroup.add(eventHorizon);
 
-  // Foton sfera nurlanishi (Photon Sphere Aura)
   const photonSphereGeo = new THREE.SphereGeometry(1.38, 28, 28);
   const photonSphereMat = new THREE.MeshBasicMaterial({
     color: 0xe879f9,
@@ -50,7 +44,6 @@ function initStolasSpaceScene() {
   const photonSphere = new THREE.Mesh(photonSphereGeo, photonSphereMat);
   blackHoleGroup.add(photonSphere);
 
-  // Akkretsion disk (Accretion Disk)
   function createAccretionTexture() {
     const canvas = document.createElement("canvas");
     canvas.width = 512;
@@ -81,9 +74,7 @@ function initStolasSpaceScene() {
   accretionDisk.rotation.y = Math.PI / 8;
   blackHoleGroup.add(accretionDisk);
 
-  /* =============================================================
-   * (2) O'NG PASTKI OLTIN HALQALI SAYYORA (Biroz o'ngroqqa surildi)
-   * ============================================================= */
+  // 2. O'ng Pastki Oltin Halqali Sayyora
   function createAmberPlanetTexture() {
     const canvas = document.createElement("canvas");
     canvas.width = 512;
@@ -114,10 +105,9 @@ function initStolasSpaceScene() {
     opacity: 0.95
   });
   const rightPlanet = new THREE.Mesh(rightPlanetGeo, rightPlanetMat);
-  rightPlanet.position.set(7.2, -3.2, -1.8); // O'ngroqqa surilgan koordinata
+  rightPlanet.position.set(7.2, -3.2, -1.8);
   worldGroup.add(rightPlanet);
 
-  // Katta Oltin Halqa
   const ringGeo = new THREE.RingGeometry(2.2, 3.3, 64);
   const ringMat = new THREE.MeshBasicMaterial({
     color: 0xfbbf24,
@@ -131,7 +121,7 @@ function initStolasSpaceScene() {
   saturnRing.rotation.y = -Math.PI / 7;
   worldGroup.add(saturnRing);
 
-  /* --- Yulduzlar to'dasi (1400 Stars) --- */
+  // 3. Yulduzlar to'dasi
   const starGeo = new THREE.BufferGeometry();
   const starCount = 1400;
   const starPositions = new Float32Array(starCount * 3);
@@ -152,7 +142,7 @@ function initStolasSpaceScene() {
   const starField = new THREE.Points(starGeo, starMat);
   scene.add(starField);
 
-  /* --- Uchuvchi Kometalar --- */
+  // 4. Kometalar
   const comets = [];
   function launchComet() {
     const cometGeo = new THREE.BufferGeometry();
@@ -202,10 +192,8 @@ function initStolasSpaceScene() {
 
     rightPlanet.rotation.y += 0.003;
     saturnRing.rotation.z += 0.001;
-
     accretionDisk.rotation.z += 0.006;
     photonSphere.rotation.y -= 0.004;
-
     starField.rotation.y -= 0.0002;
 
     for (let i = comets.length - 1; i >= 0; i--) {
@@ -237,7 +225,7 @@ function initStolasSpaceScene() {
 }
 
 /* -------------------------------------------------------------
- * 2. Zudlik bilan Tilni Almashtirish (No Reload / No Scroll Jump)
+ * 2. Zudlik bilan Tilni Almashtirish (No Reload / No Jump)
  * ------------------------------------------------------------- */
 function initInstantLanguageSwitch() {
   const transElem = document.getElementById("i18n-translations");
@@ -255,6 +243,7 @@ function initInstantLanguageSwitch() {
   buttons.forEach(btn => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
+      e.stopPropagation();
       const lang = btn.getAttribute("data-lang");
       if (!lang || !translations[lang]) return;
 
@@ -311,7 +300,9 @@ function initInstantLanguageSwitch() {
         `).join("");
       }
 
-      fetch(`/set-lang/${lang}`).catch(() => {});
+      fetch(`/set-lang/${lang}`, {
+        headers: { "X-Requested-With": "XMLHttpRequest" }
+      }).catch(() => {});
     });
   });
 }
@@ -370,9 +361,17 @@ function initContactForm() {
         status.textContent = "✓ " + data.message;
         status.style.color = "#facc15";
         form.reset();
+
+        // 5 soniyadan so'ng xabar avtomatik yo'qoladi
+        setTimeout(() => {
+          status.textContent = "";
+        }, 5000);
       } else {
         status.textContent = "✗ " + (data.message || "Error");
         status.style.color = "#ef4444";
+        setTimeout(() => {
+          status.textContent = "";
+        }, 6000);
       }
     } catch (err) {
       status.textContent = "✗ " + err.message;

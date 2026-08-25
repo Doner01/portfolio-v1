@@ -64,17 +64,19 @@
   display: flex;
   align-items: center;
   padding-top: 5rem;
-  background: radial-gradient(circle at 50% 30%, rgba(244, 114, 182, 0.15) 0%, transparent 60%);
+  overflow: hidden;
 
   &__content {
     position: relative;
     z-index: 2;
-    max-width: 620px;
-    pointer-events: none;
-  }
-
-  &__content > * {
-    pointer-events: auto;
+    max-width: 600px;
+    background: rgba(11, 5, 44, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2.2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(192, 132, 252, 0.15);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   }
 
   &__tagline {
@@ -84,14 +86,14 @@
     font-family: $font-mono;
     margin-bottom: 1rem;
     background: rgba(250, 204, 21, 0.12);
-    padding: 0.3rem 0.85rem;
+    padding: 0.35rem 0.85rem;
     border-radius: 50px;
     border: 1px solid rgba(250, 204, 21, 0.3);
   }
 
   &__title {
-    font-size: 3.1rem;
-    line-height: 1.15;
+    font-size: 2.9rem;
+    line-height: 1.2;
     margin-bottom: 1.25rem;
 
     .gradient-text {
@@ -159,13 +161,15 @@
   font-size: 0.85rem;
 }
 
-// Mobile Breakpoints
 @media (max-width: 768px) {
   .navbar__menu {
     gap: 1rem;
     font-size: 0.85rem;
   }
   .hero__title {
-    font-size: 2.3rem;
+    font-size: 2.1rem;
+  }
+  .hero__content {
+    padding: 1.5rem;
   }
 }

@@ -6,27 +6,30 @@
   <div id="three-canvas-container" class="canvas-container"></div>
   <div class="container">
     <div class="hero__content">
-      <span class="hero__tagline mono">{{ t.hero_tagline }}</span>
+      <span class="hero__tagline mono" data-i18n="hero_tagline">{{ t.hero_tagline }}</span>
       <h1 class="hero__title">
-        {{ t.hero_title_1 }} <span class="gradient-text">{{ t.hero_title_accent_1 }}</span> {{ t.hero_title_2 }} <span class="gradient-text">{{ t.hero_title_accent_2 }}</span>.
+        <span data-i18n="hero_title_1">{{ t.hero_title_1 }}</span>
+        <span class="gradient-text" data-i18n="hero_title_accent_1">{{ t.hero_title_accent_1 }}</span>
+        <span data-i18n="hero_title_2">{{ t.hero_title_2 }}</span>
+        <span class="gradient-text" data-i18n="hero_title_accent_2">{{ t.hero_title_accent_2 }}</span>.
       </h1>
-      <p class="hero__desc">
+      <p class="hero__desc" data-i18n="hero_desc">
         {{ t.hero_desc }}
       </p>
       <div class="hero__actions">
-        <a href="#projects" class="btn btn--primary">{{ t.btn_projects }}</a>
-        <a href="#about" class="btn btn--outline mono">{{ t.nav_about }}</a>
+        <a href="#projects" class="btn btn--primary" data-i18n="btn_projects">{{ t.btn_projects }}</a>
+        <a href="#about" class="btn btn--outline mono" data-i18n="nav_about">{{ t.nav_about }}</a>
       </div>
     </div>
   </div>
 </header>
 
-<!-- About Section with Gamer & System Tweaking Profile -->
+<!-- About Section -->
 <section id="about" class="section">
   <div class="container">
     <div class="section__header">
-      <h2>{{ t.about_heading }}</h2>
-      <p>{{ t.about_sub }}</p>
+      <h2 data-i18n="about_heading">{{ t.about_heading }}</h2>
+      <p data-i18n="about_sub">{{ t.about_sub }}</p>
     </div>
     
     <div class="about-grid">
@@ -35,12 +38,12 @@
           <span class="card-tag">🎓 Student @ AKHU</span>
           <span class="card-tag">💻 Developer</span>
         </div>
-        <p class="about-text">{{ t.about_p1 }}</p>
-        <p class="about-text" style="margin-top: 1rem;">{{ t.about_p2 }}</p>
+        <p class="about-text" data-i18n="about_p1">{{ t.about_p1 }}</p>
+        <p class="about-text" style="margin-top: 1rem;" data-i18n="about_p2">{{ t.about_p2 }}</p>
       </div>
 
       <div class="glass-panel about-card">
-        <h3 class="about-card__title mono" style="color: #06b6d4; margin-bottom: 1rem;">{{ t.gamer_title }}</h3>
+        <h3 class="about-card__title mono" style="color: #facc15; margin-bottom: 1rem;" data-i18n="gamer_title">{{ t.gamer_title }}</h3>
         
         <div class="interest-tags">
           <div class="interest-item">
@@ -81,10 +84,10 @@
 <section id="projects" class="section">
   <div class="container">
     <div class="section__header">
-      <h2>{{ t.projects_heading }}</h2>
-      <p>{{ t.projects_sub }}</p>
+      <h2 data-i18n="projects_heading">{{ t.projects_heading }}</h2>
+      <p data-i18n="projects_sub">{{ t.projects_sub }}</p>
     </div>
-    <div class="grid grid--projects">
+    <div id="projects-container" class="grid grid--projects">
       {% for project in projects %}
       <article class="project-card">
         <div>
@@ -113,18 +116,18 @@
 <section id="skills" class="section">
   <div class="container">
     <div class="section__header">
-      <h2>{{ t.skills_heading }}</h2>
-      <p>{{ t.skills_sub }}</p>
+      <h2 data-i18n="skills_heading">{{ t.skills_heading }}</h2>
+      <p data-i18n="skills_sub">{{ t.skills_sub }}</p>
     </div>
-    <div class="grid grid--skills">
+    <div id="skills-container" class="grid grid--skills">
       {% for category, items in skills.items() %}
       <div class="glass-panel" style="padding: 1.75rem;">
-        <h3 style="margin-bottom: 1.5rem; font-size: 1.15rem; color: #06b6d4;">{{ category }}</h3>
+        <h3 style="margin-bottom: 1.5rem; font-size: 1.15rem; color: #facc15;">{{ category }}</h3>
         {% for skill in items %}
         <div class="skill-item">
           <div class="skill-item__meta">
             <span>{{ skill.name }}</span>
-            <span class="mono" style="color: #9ca3af;">{{ skill.level }}%</span>
+            <span class="mono" style="color: #c4b5fd;">{{ skill.level }}%</span>
           </div>
           <div class="skill-item__bar">
             <div class="skill-item__fill" style="width: {{ skill.level }}%;"></div>
@@ -141,23 +144,39 @@
 <section id="contact" class="section">
   <div class="container" style="max-width: 650px;">
     <div class="section__header">
-      <h2>{{ t.contact_heading }}</h2>
-      <p>{{ t.contact_sub }}</p>
+      <h2 data-i18n="contact_heading">{{ t.contact_heading }}</h2>
+      <p data-i18n="contact_sub">{{ t.contact_sub }}</p>
     </div>
+
+    <!-- Direct Email Display Card -->
+    <div class="glass-panel" style="padding: 1.25rem 1.75rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.4rem;">📬</span>
+        <div>
+          <small class="mono" style="color: #c4b5fd; display: block;" data-i18n="contact_email_label">{{ t.contact_email_label }}</small>
+          <a href="mailto:{{ my_email }}" class="mono" style="font-size: 1rem; font-weight: 600; color: #facc15;">{{ my_email }}</a>
+        </div>
+      </div>
+      <button id="copy-email-btn" class="btn btn--outline mono" style="padding: 0.45rem 0.9rem; font-size: 0.8rem;" data-email="{{ my_email }}">
+        📋 <span data-i18n="copy_email_btn">{{ t.copy_email_btn }}</span>
+      </button>
+    </div>
+
+    <!-- Contact Form -->
     <form id="contact-form" class="glass-panel" style="padding: 2rem; display: flex; flex-direction: column; gap: 1.25rem;">
       <div>
-        <label class="mono" style="display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: #9ca3af;">{{ t.form_name }}</label>
-        <input type="text" id="name" required style="width: 100%; background: #06090e; border: 1px solid rgba(255,255,255,0.08); color: #fff; padding: 0.75rem; border-radius: 6px;">
+        <label class="mono" style="display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: #c4b5fd;" data-i18n="form_name">{{ t.form_name }}</label>
+        <input type="text" id="name" required style="width: 100%; background: #080318; border: 1px solid rgba(192, 132, 252, 0.2); color: #fff; padding: 0.75rem; border-radius: 6px;">
       </div>
       <div>
-        <label class="mono" style="display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: #9ca3af;">{{ t.form_email }}</label>
-        <input type="email" id="email" required style="width: 100%; background: #06090e; border: 1px solid rgba(255,255,255,0.08); color: #fff; padding: 0.75rem; border-radius: 6px;">
+        <label class="mono" style="display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: #c4b5fd;" data-i18n="form_email">{{ t.form_email }}</label>
+        <input type="email" id="email" required style="width: 100%; background: #080318; border: 1px solid rgba(192, 132, 252, 0.2); color: #fff; padding: 0.75rem; border-radius: 6px;">
       </div>
       <div>
-        <label class="mono" style="display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: #9ca3af;">{{ t.form_message }}</label>
-        <textarea id="message" rows="4" required style="width: 100%; background: #06090e; border: 1px solid rgba(255,255,255,0.08); color: #fff; padding: 0.75rem; border-radius: 6px; resize: vertical;"></textarea>
+        <label class="mono" style="display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: #c4b5fd;" data-i18n="form_message">{{ t.form_message }}</label>
+        <textarea id="message" rows="4" required style="width: 100%; background: #080318; border: 1px solid rgba(192, 132, 252, 0.2); color: #fff; padding: 0.75rem; border-radius: 6px; resize: vertical;"></textarea>
       </div>
-      <button type="submit" class="btn btn--primary" style="justify-content: center;">{{ t.form_submit }}</button>
+      <button type="submit" class="btn btn--primary" style="justify-content: center;" data-i18n="form_submit">{{ t.form_submit }}</button>
       <div id="contact-status" class="mono" style="font-size: 0.85rem; text-align: center;"></div>
     </form>
   </div>

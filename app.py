@@ -155,6 +155,7 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
     }
 }
 
+# Siz kiritgan aniq GitHub havolalari bilan
 PROJECTS_DATA: Dict[str, List[Project]] = {
     "uz": [
         {
@@ -163,7 +164,7 @@ PROJECTS_DATA: Dict[str, List[Project]] = {
             "category": "Backend",
             "tech": ["Python", "Flask", "Jinja2", "SQLite", "SCSS"],
             "summary": "Marshrutlash (routing), andozalar renderlash, sessiyalar boshqaruvi va ma'lumotlar bazasi bilan ishlashni o'z ichiga olgan to'liq backend tizimi.",
-            "github": "https://github.com",
+            "github": "https://github.com/Doner01/flask_learning",
             "live_demo": "#"
         },
         {
@@ -172,7 +173,7 @@ PROJECTS_DATA: Dict[str, List[Project]] = {
             "category": "Full-Stack",
             "tech": ["Python", "Flask", "JavaScript", "SCSS"],
             "summary": "Foydalanuvchilarni qo'shish, filtrlash, tahrirlash va ma'lumotlar oqimini tartibga soluvchi to'liq CRUD veb-ilovasi.",
-            "github": "https://github.com",
+            "github": "https://github.com/Doner01/user_list",
             "live_demo": "#"
         },
         {
@@ -181,7 +182,7 @@ PROJECTS_DATA: Dict[str, List[Project]] = {
             "category": "Frontend",
             "tech": ["HTML5", "SCSS", "JavaScript", "Responsive UI"],
             "summary": "YouTube interfeysiga asoslangan, moslashuvchan video pleyer, to'rsimon (grid) katalog va zamonaviy kosmik dark-theme dizayni.",
-            "github": "https://github.com",
+            "github": "https://github.com/Doner01/youtube",
             "live_demo": "#"
         }
     ],
@@ -192,7 +193,7 @@ PROJECTS_DATA: Dict[str, List[Project]] = {
             "category": "Backend",
             "tech": ["Python", "Flask", "Jinja2", "SQLite", "SCSS"],
             "summary": "Серверная песочница, включающая маршрутизацию URL, шаблонизацию Jinja2, управление сессиями и CRUD операции с БД.",
-            "github": "https://github.com",
+            "github": "https://github.com/Doner01/flask_learning",
             "live_demo": "#"
         },
         {
@@ -201,7 +202,7 @@ PROJECTS_DATA: Dict[str, List[Project]] = {
             "category": "Full-Stack",
             "tech": ["Python", "Flask", "JavaScript", "SCSS"],
             "summary": "Интерактивное веб-приложение для добавления, фильтрации, редактирования пользователей и структурирования данных.",
-            "github": "https://github.com",
+            "github": "https://github.com/Doner01/user_list",
             "live_demo": "#"
         },
         {
@@ -210,7 +211,7 @@ PROJECTS_DATA: Dict[str, List[Project]] = {
             "category": "Frontend",
             "tech": ["HTML5", "SCSS", "JavaScript", "Responsive UI"],
             "summary": "Адаптивный медиа-интерфейс в стиле YouTube с кастомными видеокомпонентами и оптимизированным дизайном.",
-            "github": "https://github.com",
+            "github": "https://github.com/Doner01/youtube",
             "live_demo": "#"
         }
     ],
@@ -221,7 +222,7 @@ PROJECTS_DATA: Dict[str, List[Project]] = {
             "category": "Backend",
             "tech": ["Python", "Flask", "Jinja2", "SQLite", "SCSS"],
             "summary": "Full-featured backend sandbox covering URL routing, Jinja2 template inheritance, session handling, and database operations.",
-            "github": "https://github.com",
+            "github": "https://github.com/Doner01/flask_learning",
             "live_demo": "#"
         },
         {
@@ -230,7 +231,7 @@ PROJECTS_DATA: Dict[str, List[Project]] = {
             "category": "Full-Stack",
             "tech": ["Python", "Flask", "JavaScript", "SCSS"],
             "summary": "Interactive user management application supporting full CRUD operations, live search filtering, and clean data modeling.",
-            "github": "https://github.com",
+            "github": "https://github.com/Doner01/user_list",
             "live_demo": "#"
         },
         {
@@ -239,7 +240,7 @@ PROJECTS_DATA: Dict[str, List[Project]] = {
             "category": "Frontend",
             "tech": ["HTML5", "SCSS", "JavaScript", "Responsive UI"],
             "summary": "Responsive media layout inspired by YouTube, featuring custom video components, dynamic sidebar, and optimized styling.",
-            "github": "https://github.com",
+            "github": "https://github.com/Doner01/youtube",
             "live_demo": "#"
         }
     ]
@@ -306,7 +307,9 @@ SKILLS_DATA: Dict[str, Dict[str, List[SkillItem]]] = {
 def set_language(lang_code: str) -> ResponseReturnValue:
     if lang_code in ["uz", "ru", "en"]:
         session["lang"] = lang_code
-    return jsonify({"status": "success", "lang": lang_code})
+    
+    # Agar brauzer to'g'ridan-to'g'ri o'tsa, orqaga qaytarish (JSON o'rniga)
+    return redirect(request.referrer or url_for("index"))
 
 @app.route("/")
 def index() -> ResponseReturnValue:
@@ -343,9 +346,8 @@ def contact() -> ResponseReturnValue:
         }
         return jsonify({"status": "error", "message": err_msgs.get(lang, err_msgs["uz"])}), 400
 
-    # Gmail SMTP orqali user.doner2006@gmail.com ga yuborish
     smtp_user = os.getenv("GMAIL_USER", MY_EMAIL)
-    smtp_pass = os.getenv("GMAIL_APP_PASSWORD") # Google App Password
+    smtp_pass = os.getenv("GMAIL_APP_PASSWORD")
 
     if smtp_pass:
         try:
@@ -361,7 +363,7 @@ def contact() -> ResponseReturnValue:
                 server.login(smtp_user, smtp_pass)
                 server.send_message(msg)
         except Exception as e:
-            print(f"Gmail SMTP yuborishda xatolik: {e}")
+            print(f"Gmail SMTP error: {e}")
 
     ok_msgs = {
         "uz": f"Rahmat {name}, xabaringiz {MY_EMAIL} ga yetkazildi!",

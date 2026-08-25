@@ -17,23 +17,23 @@
     <div class="container navbar__inner">
       <a href="#hero" class="navbar__brand mono">
         <span class="status-indicator"></span>
-        <span class="brand-text">{{ t.brand_title }}<span class="brand-accent">{{ t.brand_ext }}</span></span>
+        <span class="brand-text"><span data-i18n="brand_title">{{ t.brand_title }}</span><span class="brand-accent" data-i18n="brand_ext">{{ t.brand_ext }}</span></span>
       </a>
 
       <ul class="navbar__menu">
-        <li><a href="#about">{{ t.nav_about }}</a></li>
-        <li><a href="#projects">{{ t.nav_projects }}</a></li>
-        <li><a href="#skills">{{ t.nav_skills }}</a></li>
-        <li><a href="#contact">{{ t.nav_contact }}</a></li>
+        <li><a href="#about" data-i18n="nav_about">{{ t.nav_about }}</a></li>
+        <li><a href="#projects" data-i18n="nav_projects">{{ t.nav_projects }}</a></li>
+        <li><a href="#skills" data-i18n="nav_skills">{{ t.nav_skills }}</a></li>
+        <li><a href="#contact" data-i18n="nav_contact">{{ t.nav_contact }}</a></li>
       </ul>
 
-      <!-- 3 Tilli o'tkazgich -->
+      <!-- Bir zumda til o'tkazuvchi tugmalar -->
       <div class="lang-switcher mono">
-        <a href="{{ url_for('set_language', lang_code='uz') }}" class="lang-btn {% if current_lang == 'uz' %}active{% endif %}">UZ</a>
+        <button type="button" class="lang-btn {% if current_lang == 'uz' %}active{% endif %}" data-lang="uz">UZ</button>
         <span class="divider">/</span>
-        <a href="{{ url_for('set_language', lang_code='ru') }}" class="lang-btn {% if current_lang == 'ru' %}active{% endif %}">RU</a>
+        <button type="button" class="lang-btn {% if current_lang == 'ru' %}active{% endif %}" data-lang="ru">RU</button>
         <span class="divider">/</span>
-        <a href="{{ url_for('set_language', lang_code='en') }}" class="lang-btn {% if current_lang == 'en' %}active{% endif %}">EN</a>
+        <button type="button" class="lang-btn {% if current_lang == 'en' %}active{% endif %}" data-lang="en">EN</button>
       </div>
     </div>
   </nav>
@@ -42,9 +42,13 @@
 
   <footer class="footer">
     <div class="container">
-      <p class="mono">{{ t.footer_text }}</p>
+      <p class="mono" data-i18n="footer_text">{{ t.footer_text }}</p>
     </div>
   </footer>
+
+  <script id="i18n-translations" type="application/json">{{ translations_json | safe }}</script>
+  <script id="i18n-projects" type="application/json">{{ projects_json | safe }}</script>
+  <script id="i18n-skills" type="application/json">{{ skills_json | safe }}</script>
 
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
