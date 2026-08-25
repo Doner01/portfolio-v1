@@ -11,7 +11,7 @@
   pointer-events: auto;
 }
 
-// Brand Logo & Status Indicator
+// Status Dot
 .status-indicator {
   width: 8px;
   height: 8px;
@@ -101,6 +101,78 @@
       background: rgba(6, 182, 212, 0.08);
       transform: translateY(-2px);
     }
+  }
+}
+
+// About Card & Gamer Tags
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.about-card {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__header {
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+  }
+}
+
+.card-tag {
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  color: $accent-cyan;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+}
+
+.about-text {
+  color: $text-secondary;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.interest-tags {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.interest-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $border-color;
+  padding: 0.75rem 1rem;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: $transition-smooth;
+
+  &:hover {
+    border-color: $accent-cyan;
+    transform: translateY(-2px);
+  }
+
+  .interest-icon {
+    font-size: 1.3rem;
+  }
+
+  strong {
+    display: block;
+    font-size: 0.88rem;
+    color: $text-primary;
+  }
+
+  small {
+    color: $text-muted;
+    font-size: 0.72rem;
   }
 }
 
@@ -210,5 +282,11 @@
     background: linear-gradient(90deg, $accent-cyan, $accent-emerald);
     border-radius: 3px;
     transition: width 1s ease-in-out;
+  }
+}
+
+@media (max-width: 600px) {
+  .interest-tags {
+    grid-template-columns: 1fr;
   }
 }

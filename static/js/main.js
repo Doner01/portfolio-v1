@@ -3,16 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
   initContactForm();
 });
 
-/* -------------------------------------------------------------
- * 1. Three.js 3D Hero Viewport
- * ------------------------------------------------------------- */
 function init3DHero() {
   const container = document.getElementById("three-canvas-container");
   if (!container) return;
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 6;
+  camera.position.z = 6.5;
 
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -22,35 +19,35 @@ function init3DHero() {
   const meshGroup = new THREE.Group();
   scene.add(meshGroup);
 
-  // Tashqi Icosahedron Wireframe
-  const geometry = new THREE.IcosahedronGeometry(2.2, 1);
-  const wireframeMaterial = new THREE.MeshBasicMaterial({
+  // 1. Tashqi 3D Icosahedron
+  const outerGeo = new THREE.IcosahedronGeometry(2.4, 1);
+  const outerMat = new THREE.MeshBasicMaterial({
     color: 0x06b6d4,
     wireframe: true,
     transparent: true,
     opacity: 0.35
   });
-  const icosahedron = new THREE.Mesh(geometry, wireframeMaterial);
-  meshGroup.add(icosahedron);
+  const outerMesh = new THREE.Mesh(outerGeo, outerMat);
+  meshGroup.add(outerMesh);
 
-  // Ichki Yadrosi
-  const coreGeometry = new THREE.OctahedronGeometry(1.2, 0);
-  const coreMaterial = new THREE.MeshBasicMaterial({
+  // 2. Ichki Glowing Dodecahedron (Geymer yadrosi)
+  const coreGeo = new THREE.DodecahedronGeometry(1.2, 0);
+  const coreMat = new THREE.MeshBasicMaterial({
     color: 0x10b981,
     wireframe: true,
     transparent: true,
-    opacity: 0.7
+    opacity: 0.75
   });
-  const core = new THREE.Mesh(coreGeometry, coreMaterial);
-  meshGroup.add(core);
+  const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+  meshGroup.add(coreMesh);
 
-  // Zarrachalar to'dasi (Particle Field)
+  // 3. Zarrachalar (Particle Field)
   const particlesGeo = new THREE.BufferGeometry();
-  const count = 300;
+  const count = 350;
   const positions = new Float32Array(count * 3);
 
   for (let i = 0; i < count * 3; i++) {
-    positions[i] = (Math.random() - 0.5) * 15;
+    positions[i] = (Math.random() - 0.5) * 16;
   }
   particlesGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
@@ -73,16 +70,16 @@ function init3DHero() {
   function animate() {
     requestAnimationFrame(animate);
 
-    meshGroup.rotation.x += 0.003;
-    meshGroup.rotation.y += 0.004;
+    meshGroup.rotation.x += 0.0025;
+    meshGroup.rotation.y += 0.0035;
 
-    core.rotation.x -= 0.006;
-    core.rotation.z -= 0.004;
+    coreMesh.rotation.x -= 0.005;
+    coreMesh.rotation.z += 0.004;
 
-    particleField.rotation.y -= 0.0008;
+    particleField.rotation.y -= 0.0006;
 
-    camera.position.x += (mouseX * 0.8 - camera.position.x) * 0.05;
-    camera.position.y += (-mouseY * 0.8 - camera.position.y) * 0.05;
+    camera.position.x += (mouseX * 0.7 - camera.position.x) * 0.05;
+    camera.position.y += (-mouseY * 0.7 - camera.position.y) * 0.05;
     camera.lookAt(scene.position);
 
     renderer.render(scene, camera);
@@ -96,9 +93,6 @@ function init3DHero() {
   });
 }
 
-/* -------------------------------------------------------------
- * 2. Aloqa Formasi Handler (Bilingual)
- * ------------------------------------------------------------- */
 function initContactForm() {
   const form = document.getElementById("contact-form");
   const status = document.getElementById("contact-status");
@@ -128,7 +122,7 @@ function initContactForm() {
         status.style.color = "#10b981";
         form.reset();
       } else {
-        status.textContent = "✗ " + (data.message || "Xatolik yuz berdi.");
+        status.textContent = "✗ " + (data.message || "Error");
         status.style.color = "#ef4444";
       }
     } catch (err) {

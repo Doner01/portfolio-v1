@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Hero Section (Three.js 3D fon) -->
+<!-- Hero Section -->
 <header id="hero" class="hero">
   <div id="three-canvas-container" class="canvas-container"></div>
   <div class="container">
@@ -15,11 +15,67 @@
       </p>
       <div class="hero__actions">
         <a href="#projects" class="btn btn--primary">{{ t.btn_projects }}</a>
-        <a href="#contact" class="btn btn--outline mono">{{ t.btn_contact }}</a>
+        <a href="#about" class="btn btn--outline mono">{{ t.nav_about }}</a>
       </div>
     </div>
   </div>
 </header>
+
+<!-- About Section with Gamer & System Tweaking Profile -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="section__header">
+      <h2>{{ t.about_heading }}</h2>
+      <p>{{ t.about_sub }}</p>
+    </div>
+    
+    <div class="about-grid">
+      <div class="glass-panel about-card">
+        <div class="about-card__header mono">
+          <span class="card-tag">🎓 Student @ AKHU</span>
+          <span class="card-tag">💻 Developer</span>
+        </div>
+        <p class="about-text">{{ t.about_p1 }}</p>
+        <p class="about-text" style="margin-top: 1rem;">{{ t.about_p2 }}</p>
+      </div>
+
+      <div class="glass-panel about-card">
+        <h3 class="about-card__title mono" style="color: #06b6d4; margin-bottom: 1rem;">{{ t.gamer_title }}</h3>
+        
+        <div class="interest-tags">
+          <div class="interest-item">
+            <span class="interest-icon">⚔️</span>
+            <div>
+              <strong>Hollow Knight</strong>
+              <small>Favorite Metroidvania</small>
+            </div>
+          </div>
+          <div class="interest-item">
+            <span class="interest-icon">🎯</span>
+            <div>
+              <strong>Counter-Strike 2</strong>
+              <small>Competitive Tactical FPS</small>
+            </div>
+          </div>
+          <div class="interest-item">
+            <span class="interest-icon">♟️</span>
+            <div>
+              <strong>Strategy Games</strong>
+              <small>Chess &amp; Tactical Mindsets</small>
+            </div>
+          </div>
+          <div class="interest-item">
+            <span class="interest-icon">⚙️</span>
+            <div>
+              <strong>Windows Optimization</strong>
+              <small>Low-latency &amp; OS Debloating</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Projects Section -->
 <section id="projects" class="section">
