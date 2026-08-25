@@ -15,9 +15,10 @@ html {
 body {
   background-color: $bg-space-dark;
   background-image: 
-    radial-gradient(circle at 15% 20%, rgba(168, 85, 247, 0.22) 0%, transparent 45%),
-    radial-gradient(circle at 85% 35%, rgba(217, 70, 239, 0.18) 0%, transparent 50%),
-    radial-gradient(circle at 50% 80%, rgba(56, 189, 248, 0.12) 0%, transparent 60%);
+    radial-gradient(circle at 50% 30%, rgba(244, 114, 182, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 10% 25%, rgba(59, 130, 246, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 90% 30%, rgba(250, 204, 21, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(192, 132, 252, 0.15) 0%, transparent 60%);
   background-attachment: fixed;
   color: $text-primary;
   font-family: $font-sans;
@@ -27,12 +28,12 @@ body {
 }
 
 a {
-  color: $accent-purple;
+  color: $accent-nebula-purple;
   text-decoration: none;
   transition: $transition-smooth;
 
-&:hover {
-  color: color.adjust($accent-magenta, $lightness: 10%);
+  &:hover {
+    color: color.adjust($accent-stolas-pink, $lightness: 10%);
   }
 }
 
@@ -48,9 +49,9 @@ h1, h2, h3, h4 {
 
 .glass-panel {
   background: $bg-card;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border: 1px solid $border-color;
   border-radius: $radius-md;
-  box-shadow: 0 10px 40px rgba(8, 3, 24, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(7, 2, 20, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }

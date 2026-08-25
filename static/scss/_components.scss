@@ -11,7 +11,7 @@
   pointer-events: auto;
 }
 
-// Status Dot
+// Status Indicator
 .status-indicator {
   width: 9px;
   height: 9px;
@@ -19,17 +19,17 @@
   border-radius: 50%;
   box-shadow: 0 0 12px $accent-star-yellow;
   display: inline-block;
-  animation: pulse-space 2s infinite ease-in-out;
+  animation: pulse-star 2s infinite ease-in-out;
 }
 
-@keyframes pulse-space {
+@keyframes pulse-star {
   0%, 100% {
     opacity: 1;
     transform: scale(1);
     box-shadow: 0 0 12px $accent-star-yellow;
   }
   50% {
-    opacity: 0.5;
+    opacity: 0.45;
     transform: scale(0.85);
     box-shadow: 0 0 4px $accent-star-yellow;
   }
@@ -55,8 +55,8 @@
     &.active {
       color: #ffffff;
       font-weight: 700;
-      background: linear-gradient(135deg, $accent-purple, $accent-magenta);
-      box-shadow: 0 0 10px $accent-purple-glow;
+      background: linear-gradient(135deg, $accent-stolas-pink, $accent-nebula-purple);
+      box-shadow: 0 0 10px rgba(244, 114, 182, 0.5);
     }
 
     &:hover {
@@ -84,30 +84,31 @@
   border: 1px solid transparent;
 
   &--primary {
-    background: linear-gradient(135deg, $accent-star-yellow, color.adjust($accent-star-yellow, $lightness: -15%));    color: #11082c;
+    background: linear-gradient(135deg, $accent-star-yellow, color.adjust($accent-star-yellow, $lightness: -15%));
+    color: #10052c;
     box-shadow: 0 4px 20px $accent-star-glow;
 
     &:hover {
       transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 8px 25px rgba(250, 204, 21, 0.6);
+      box-shadow: 0 8px 25px rgba(250, 204, 21, 0.65);
     }
   }
 
   &--outline {
-    background: rgba(168, 85, 247, 0.1);
+    background: rgba(192, 132, 252, 0.1);
     color: #ffffff;
     border-color: $border-color;
 
     &:hover {
-      border-color: $accent-magenta;
-      background: rgba(217, 70, 239, 0.18);
+      border-color: $accent-stolas-pink;
+      background: rgba(244, 114, 182, 0.18);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px $accent-purple-glow;
+      box-shadow: 0 6px 20px rgba(244, 114, 182, 0.4);
     }
   }
 }
 
-// About Card & Gamer Tags
+// About Grid & Gamer Cards
 .about-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -128,9 +129,9 @@
 }
 
 .card-tag {
-  background: rgba(168, 85, 247, 0.15);
-  border: 1px solid rgba(168, 85, 247, 0.35);
-  color: #e9d5ff;
+  background: rgba(192, 132, 252, 0.15);
+  border: 1px solid rgba(192, 132, 252, 0.35);
+  color: #f5d0fe;
   font-size: 0.75rem;
   padding: 0.25rem 0.65rem;
   border-radius: 20px;
@@ -159,10 +160,10 @@
   transition: $transition-smooth;
 
   &:hover {
-    border-color: $accent-magenta;
-    background: rgba(168, 85, 247, 0.08);
+    border-color: $accent-stolas-pink;
+    background: rgba(244, 114, 182, 0.1);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
+    box-shadow: 0 4px 15px rgba(244, 114, 182, 0.25);
   }
 
   .interest-icon {
@@ -185,11 +186,11 @@
 // Project Cards
 .project-card {
   background: $bg-card;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border: 1px solid $border-color;
   border-radius: $radius-md;
-  box-shadow: 0 10px 36px rgba(8, 3, 24, 0.5);
+  box-shadow: 0 10px 36px rgba(7, 2, 20, 0.6);
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
@@ -205,7 +206,7 @@
     left: 0;
     width: 4px;
     height: 100%;
-    background: linear-gradient(180deg, $accent-purple, $accent-magenta);
+    background: linear-gradient(180deg, $accent-stolas-pink, $accent-star-yellow);
     opacity: 0;
     transition: $transition-smooth;
   }
@@ -214,7 +215,7 @@
     background: $bg-card-hover;
     border-color: $border-hover;
     transform: translateY(-4px);
-    box-shadow: 0 14px 40px rgba(168, 85, 247, 0.25);
+    box-shadow: 0 14px 40px rgba(244, 114, 182, 0.28);
 
     &::before {
       opacity: 1;
@@ -257,9 +258,9 @@
 }
 
 .tag {
-  background: rgba(168, 85, 247, 0.12);
-  border: 1px solid rgba(168, 85, 247, 0.25);
-  color: #e9d5ff;
+  background: rgba(192, 132, 252, 0.12);
+  border: 1px solid rgba(192, 132, 252, 0.25);
+  color: #f5d0fe;
   font-family: $font-mono;
   font-size: 0.75rem;
   padding: 0.25rem 0.6rem;
@@ -286,7 +287,7 @@
 
   &__fill {
     height: 100%;
-    background: linear-gradient(90deg, $accent-purple, $accent-magenta, $accent-star-yellow);
+    background: linear-gradient(90deg, $accent-blue-giant, $accent-stolas-pink, $accent-star-yellow);
     border-radius: 4px;
     transition: width 1s ease-in-out;
   }
