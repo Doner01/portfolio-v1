@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <radialGradient id="orbGrad" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="25%" stop-color="#f472b6" />
+      <stop offset="60%" stop-color="#7c3aed" />
+      <stop offset="90%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#09031a" />
+    </radialGradient>
+
+    <linearGradient id="goldRing" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#facc15" />
+      <stop offset="50%" stop-color="#fb923c" />
+      <stop offset="100%" stop-color="#facc15" />
+    </linearGradient>
+
+    <filter id="spaceGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Orqa Fon Halqasi -->
+  <path d="M 12 42 A 42 16 0 0 1 88 42" fill="none" stroke="url(#goldRing)" stroke-width="4.5" opacity="0.6" transform="rotate(-22 50 50)" />
+
+  <!-- Asosiy 3D Celestial Orb -->
+  <circle cx="50" cy="50" r="30" fill="url(#orbGrad)" filter="url(#spaceGlow)" />
+
+  <!-- 3D Geometrik Qovurg'alar -->
+  <ellipse cx="50" cy="50" rx="14" ry="30" fill="none" stroke="#f5d0fe" stroke-width="1.2" opacity="0.35" />
+  <ellipse cx="50" cy="50" rx="30" ry="12" fill="none" stroke="#f5d0fe" stroke-width="1.2" opacity="0.35" />
+
+  <!-- Old Qismdagi Oltin Halqa -->
+  <path d="M 88 42 A 42 16 0 0 1 12 42" fill="none" stroke="url(#goldRing)" stroke-width="5" stroke-linecap="round" transform="rotate(-22 50 50)" filter="url(#spaceGlow)" />
+
+  <!-- 4 Qirrali Porlovchi Yulduzcha -->
+  <polygon points="78,22 80,27 85,29 80,31 78,36 76,31 71,29 76,27" fill="#ffffff" filter="url(#spaceGlow)" />
+  <polygon points="78,24 79.5,27.5 83,29 79.5,30.5 78,34 76.5,30.5 73,29 76.5,27.5" fill="#facc15" />
+</svg>

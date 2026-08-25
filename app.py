@@ -11,6 +11,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-secret-key-change-in-production")
 
 MY_EMAIL = "user.doner2006@gmail.com"
+AUTHOR_NAME = "Ulug'bekov Shohjahon"
 
 class Project(TypedDict):
     id: str
@@ -28,25 +29,25 @@ class SkillItem(TypedDict):
 # UZ / RU / EN Lug'ati
 TRANSLATIONS: Dict[str, Dict[str, str]] = {
     "uz": {
-        "brand_title": "Shohjahon",
+        "brand_title": "Ulug'bekov",
         "brand_ext": ".space",
         "nav_about": "Haqimda",
         "nav_projects": "Loyihalar",
         "nav_skills": "Ko'nikmalar",
         "nav_contact": "Bog'lanish",
         
-        "hero_tagline": "🚀 AKHU Talabasi • Frontend & Python Backend • Gamer",
+        "hero_tagline": f"🚀 AKHU Talabasi • {AUTHOR_NAME} • Gamer",
         "hero_title_1": "Kosmik",
         "hero_title_accent_1": "Frontend & Backend",
         "hero_title_2": "va Interaktiv",
         "hero_title_accent_2": "3D Olam",
-        "hero_desc": "Al-Xorazmiy universiteti (AKHU) talabasiman. Veb-dasturlash (Frontend 75%), Python backend arxitekturasi, Windows optimizatsiyasi va Three.js/3D kosmik modellashtirish bilan shug'ullanaman.",
+        "hero_desc": f"Men {AUTHOR_NAME}, Al-Xorazmiy universiteti (AKHU) talabasiman. Veb-dasturlash (Frontend 75%), Python backend arxitekturasi, Windows optimizatsiyasi va Three.js/3D kosmik modellashtirish bilan shug'ullanaman.",
         "btn_projects": "Loyihalarni ko'rish",
         "btn_contact": "Bog'lanish",
 
         "about_heading": "Men Haqimda",
         "about_sub": "Dasturlash sarguzashtlarim, tizim optimizatsiyasi va geyming qiziqishlarim",
-        "about_p1": "Al-Xorazmiy nomidagi universitetda (AKHU) dasturiy injiniring bo'yicha tahsil olyapman. SCSS, JavaScript va zamonaviy UI arxitekturasi bilan bir qatorda Python va Flask orqali tezkor va mustahkam backend tizimlarni yaratmoqdaman.",
+        "about_p1": f"Men {AUTHOR_NAME}, Al-Xorazmiy nomidagi universitetda (AKHU) dasturiy injiniring bo'yicha tahsil olyapman. SCSS, JavaScript va zamonaviy UI arxitekturasi bilan bir qatorda Python va Flask orqali tezkor va mustahkam backend tizimlarni yaratmoqdaman.",
         "about_p2": "Dasturlashdan tashqari Windows va Linux operatsion tizimlarini chuqur optimizatsiya qilish, past kechikishli (low-latency) tizim sozlamalarini yaratishga qiziqaman. Bo'sh vaqtimda sevimli o'yinlarimni o'ynayman.",
         "gamer_title": "Geyming & Tizim Qiziqishlari:",
         
@@ -57,7 +58,7 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "skills_sub": "Hozirgi amaliy bilim va tajriba darajalarim",
         
         "contact_heading": "Aloqaga Chiqish",
-        "contact_sub": "Savollaringiz, taklif yoki loyihalar bo'lsa, xabar qoldiring",
+        "contact_sub": "Hamkorlik, taklif yoki loyihalar bo'lsa, xabar qoldiring",
         "contact_email_label": "Elektron pochta:",
         "copy_email_btn": "Nusxalash",
         "copied_text": "Nusxalandi!",
@@ -67,28 +68,28 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "form_submit": "Xabarni yuborish",
         "source_code": "GitHub &rarr;",
         "live_demo": "Jonli Demo &rarr;",
-        "footer_text": f"© 2026 Shohjahon • {MY_EMAIL} • AKHU Student Space Portfolio."
+        "footer_text": f"© 2026 {AUTHOR_NAME} • {MY_EMAIL} • AKHU Student Space Portfolio."
     },
     "ru": {
-        "brand_title": "Shohjahon",
+        "brand_title": "Ulug'bekov",
         "brand_ext": ".space",
         "nav_about": "Обо мне",
         "nav_projects": "Проекты",
         "nav_skills": "Навыки",
         "nav_contact": "Контакты",
         
-        "hero_tagline": "🚀 Студент AKHU • Frontend & Python Backend • Геймер",
+        "hero_tagline": f"🚀 Студент AKHU • {AUTHOR_NAME} • Геймер",
         "hero_title_1": "Космический",
         "hero_title_accent_1": "Frontend & Backend",
         "hero_title_2": "и Интерактивный",
         "hero_title_accent_2": "3D Мир",
-        "hero_desc": "Студент университета Аль-Хорезми (AKHU). Разрабатываю эстетичные интерфейсы (Frontend 75%), серверную логику на Python/Flask, занимаюсь глубокой оптимизацией Windows и 3D-графикой.",
+        "hero_desc": f"Меня зовут {AUTHOR_NAME}, я студент Университета Аль-Хорезми (AKHU). Разрабатываю интерфейсы (Frontend 75%), серверную логику на Python/Flask, занимаюсь глубокой оптимизацией Windows и 3D-графикой.",
         "btn_projects": "Смотреть проекты",
         "btn_contact": "Связаться",
 
         "about_heading": "Обо мне",
         "about_sub": "Мой путь в инженерии, системная оптимизация и мир игр",
-        "about_p1": "Обучаюсь программной инженерии в Университете Аль-Хорезми (AKHU). Создаю эстетичные веб-интерфейсы на HTML/SCSS/JavaScript и высокопроизводительные веб-сервисы на Python и Flask.",
+        "about_p1": f"Я {AUTHOR_NAME}, обучаюсь программной инженерии в Университете Аль-Хорезми (AKHU). Создаю эстетичные веб-интерфейсы на HTML/SCSS/JavaScript и высокопроизводительные веб-сервисы на Python и Flask.",
         "about_p2": "Помимо веб-разработки, увлекаюсь тонким твикингом и оптимизацией Windows/Linux (low-latency). В свободное время погружаюсь в атмосферные игры и стратегические задачи.",
         "gamer_title": "Игры и Системный фокус:",
         
@@ -109,28 +110,28 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "form_submit": "Отправить сообщение",
         "source_code": "GitHub &rarr;",
         "live_demo": "Демо &rarr;",
-        "footer_text": f"© 2026 Shohjahon • {MY_EMAIL} • AKHU Student Space Portfolio."
+        "footer_text": f"© 2026 {AUTHOR_NAME} • {MY_EMAIL} • AKHU Student Space Portfolio."
     },
     "en": {
-        "brand_title": "Shohjahon",
+        "brand_title": "Ulug'bekov",
         "brand_ext": ".space",
         "nav_about": "About",
         "nav_projects": "Projects",
         "nav_skills": "Skills",
         "nav_contact": "Contact",
         
-        "hero_tagline": "🚀 AKHU Student • Frontend & Python Backend • Gamer",
+        "hero_tagline": f"🚀 AKHU Student • {AUTHOR_NAME} • Gamer",
         "hero_title_1": "Cosmic",
         "hero_title_accent_1": "Frontend & Backend",
         "hero_title_2": "& Interactive",
         "hero_title_accent_2": "3D Universe",
-        "hero_desc": "Software Engineering student at Al-Khwarizmi University (AKHU). Passionate about Frontend Development (75%), Python backend architectures, Windows system optimization, and 3D modeling.",
+        "hero_desc": f"I am {AUTHOR_NAME}, Software Engineering student at Al-Khwarizmi University (AKHU). Passionate about Frontend Development (75%), Python backend architectures, Windows system optimization, and 3D modeling.",
         "btn_projects": "Explore Projects",
         "btn_contact": "Get in Touch",
 
         "about_heading": "About Me",
         "about_sub": "My engineering journey, system optimization passions, and gaming world",
-        "about_p1": "Currently studying Software Engineering at Al-Khwarizmi University (AKHU). I build clean, high-performance web interfaces with HTML/SCSS/JS alongside robust Python and Flask backend services.",
+        "about_p1": f"I am {AUTHOR_NAME}, currently studying Software Engineering at Al-Khwarizmi University (AKHU). I build clean, high-performance web interfaces with HTML/SCSS/JS alongside robust Python and Flask backend services.",
         "about_p2": "Beyond web development, I am passionate about Windows low-latency optimization, OS debloating, and Linux environments. In my free time, I dive into immersive gaming.",
         "gamer_title": "Gaming & System Focus:",
         
@@ -151,11 +152,11 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "form_submit": "Transmit Message",
         "source_code": "GitHub &rarr;",
         "live_demo": "Live Demo &rarr;",
-        "footer_text": f"© 2026 Shohjahon • {MY_EMAIL} • AKHU Student Space Portfolio."
+        "footer_text": f"© 2026 {AUTHOR_NAME} • {MY_EMAIL} • AKHU Student Space Portfolio."
     }
 }
 
-# Siz kiritgan aniq GitHub havolalari bilan
+# Loyihalar havolalari
 PROJECTS_DATA: Dict[str, List[Project]] = {
     "uz": [
         {
@@ -307,8 +308,6 @@ SKILLS_DATA: Dict[str, Dict[str, List[SkillItem]]] = {
 def set_language(lang_code: str) -> ResponseReturnValue:
     if lang_code in ["uz", "ru", "en"]:
         session["lang"] = lang_code
-    
-    # Agar brauzer to'g'ridan-to'g'ri o'tsa, orqaga qaytarish (JSON o'rniga)
     return redirect(request.referrer or url_for("index"))
 
 @app.route("/")
