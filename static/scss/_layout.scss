@@ -1,34 +1,35 @@
 @use 'variables' as *;
 
 .container {
-  width: 90%;
+  width: 92%;
   max-width: $max-width;
   margin: 0 auto;
 }
 
-// Navigation Bar
+// Katta va Ko'rkam Navbar
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 100;
-  padding: 0.9rem 0;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  background: rgba(11, 5, 44, 0.85);
+  padding: 1.35rem 0;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(11, 5, 44, 0.88);
   border-bottom: 1px solid $border-color;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 
   &__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
   &__brand {
-    font-weight: 700;
-    font-size: 1.25rem;
+    font-weight: 800;
+    font-size: 1.45rem;
     color: $text-primary;
     display: inline-flex;
     align-items: center;
@@ -38,36 +39,38 @@
     &:hover {
       .navbar__logo-img {
         transform: rotate(15deg) scale(1.1);
-        filter: drop-shadow(0 0 12px rgba(244, 114, 182, 0.8));
+        filter: drop-shadow(0 0 15px rgba(244, 114, 182, 0.9));
       }
     }
 
     .brand-accent {
       color: $accent-star-yellow;
+      letter-spacing: -0.03em;
     }
   }
 
   &__logo-img {
-    width: 46px; /* Kattalashtirilgan o'lcham */
-    height: 46px;
+    width: 54px; /* Katta va tiniq o'lcham */
+    height: 54px;
     object-fit: contain;
     transition: $transition-smooth;
-    filter: drop-shadow(0 0 8px rgba(192, 132, 252, 0.6));
+    filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.7));
   }
 
   &__menu {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 2.5rem;
     list-style: none;
 
     a {
       color: $text-secondary;
-      font-size: 0.9rem;
-      font-weight: 500;
+      font-size: 1.05rem;
+      font-weight: 600;
 
       &:hover {
-        color: $text-primary;
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(244, 114, 182, 0.6);
       }
     }
   }
@@ -79,7 +82,7 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 5rem;
+  padding-top: 6.5rem;
   overflow: hidden;
 
   &__content {
@@ -179,8 +182,12 @@
 
 @media (max-width: 768px) {
   .navbar__menu {
-    gap: 1rem;
-    font-size: 0.85rem;
+    gap: 1.2rem;
+    font-size: 0.9rem;
+  }
+  .navbar__logo-img {
+    width: 42px;
+    height: 42px;
   }
   .hero__title {
     font-size: 2.1rem;
