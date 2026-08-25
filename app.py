@@ -1,9 +1,15 @@
+import os
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from typing import TypedDict, List, Dict, Any
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from flask.typing import ResponseReturnValue
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "dev-secret-key-change-in-production"
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-secret-key-change-in-production")
+
+MY_EMAIL = "user.doner2006@gmail.com"
 
 class Project(TypedDict):
     id: str
@@ -18,97 +24,133 @@ class SkillItem(TypedDict):
     name: str
     level: int
 
-# Saytdagi barcha matnlar (O'zbekcha / Inglizcha)
+# UZ / RU / EN Matnlar va Tarjimalar
 TRANSLATIONS: Dict[str, Dict[str, str]] = {
     "uz": {
         "brand_title": "Shohjahon",
-        "brand_ext": ".dev",
+        "brand_ext": ".space",
         "nav_about": "Haqimda",
         "nav_projects": "Loyihalar",
         "nav_skills": "Ko'nikmalar",
         "nav_contact": "Bog'lanish",
         
-        # Hero
-        "hero_tagline": "⚡ AKHU Talabasi • Frontend & Python Backend • Gamer",
-        "hero_title_1": "Zamonaviy",
+        "hero_tagline": "🚀 AKHU Talabasi • Frontend & Python Backend • Gamer",
+        "hero_title_1": "Kosmik",
         "hero_title_accent_1": "Frontend & Backend",
         "hero_title_2": "va Interaktiv",
-        "hero_title_accent_2": "3D Dunyo",
-        "hero_desc": "Al-Xorazmiy universiteti (AKHU) talabasiman. Veb-dasturlash (Frontend 75%), Python backend, Windows tizim optimizatsiyasi va boshlang'ich 3D modellashtirish bilan shug'ullanaman.",
+        "hero_title_accent_2": "3D Olam",
+        "hero_desc": "Al-Xorazmiy universiteti (AKHU) talabasiman. Veb-dasturlash (Frontend 75%), Python backend arxitekturasi, Windows optimizatsiyasi va Three.js/3D kosmik modellashtirish bilan shug'ullanaman.",
         "btn_projects": "Loyihalarni ko'rish",
         "btn_contact": "Bog'lanish",
 
-        # About / Qiziqishlar
         "about_heading": "Men Haqimda",
-        "about_sub": "Dasturlash, tizim optimizatsiyasi va geyming qiziqishlarim",
-        "about_p1": "Hozirda Al-Xorazmiy nomidagi universitetda (AKHU) dasturiy injiniring yo'nalishida tahsil olyapman. Vebning vizual qismi (HTML/SCSS/JS) bilan bir qatorda Python va Flask orqali mustahkam backend tizimlarni qurishni o'rganmoqdaman.",
+        "about_sub": "Dasturlash sarguzashtlarim, tizim optimizatsiyasi va geyming qiziqishlarim",
+        "about_p1": "Al-Xorazmiy nomidagi universitetda (AKHU) dasturiy injiniring bo'yicha tahsil olyapman. SCSS, JavaScript va zamonaviy UI arxitekturasi bilan bir qatorda Python va Flask orqali tezkor va mustahkam backend tizimlarni yaratmoqdaman.",
         "about_p2": "Dasturlashdan tashqari Windows va Linux operatsion tizimlarini chuqur optimizatsiya qilish, past kechikishli (low-latency) tizim sozlamalarini yaratishga qiziqaman. Bo'sh vaqtimda sevimli o'yinlarimni o'ynayman.",
         "gamer_title": "Geyming & Tizim Qiziqishlari:",
         
-        # Loyihalar
         "projects_heading": "Amaliy Loyihalarim",
         "projects_sub": "O'rganish va amaliyot davomida yaratgan loyihalarim",
-        "filter_all": "Barchasi",
         
-        # Ko'nikmalar
         "skills_heading": "Texnologiyalar & Ko'nikmalar",
         "skills_sub": "Hozirgi amaliy bilim va tajriba darajalarim",
         
-        # Aloqa
         "contact_heading": "Aloqaga Chiqish",
-        "contact_sub": "Savollaringiz, taklif yoki loyihalar bo'lsa, xabar qoldiring",
+        "contact_sub": "Hamkorlik, taklif yoki loyihalar bo'lsa, xabar qoldiring",
+        "contact_email_label": "Elektron pochta:",
+        "copy_email_btn": "Nusxalash",
+        "copied_text": "Nusxalandi!",
         "form_name": "Ismingiz",
-        "form_email": "Elektron pochta",
+        "form_email": "Sizning emailingiz",
         "form_message": "Xabar matni",
         "form_submit": "Xabarni yuborish",
         "source_code": "GitHub &rarr;",
         "live_demo": "Jonli Demo &rarr;",
-        "footer_text": "© 2026 Shohjahon • AKHU Student Portfolio. Python, Flask & SCSS yordamida yaratildi."
+        "footer_text": f"© 2026 Shohjahon • {MY_EMAIL} • AKHU Student Space Portfolio."
+    },
+    "ru": {
+        "brand_title": "Shohjahon",
+        "brand_ext": ".space",
+        "nav_about": "Обо мне",
+        "nav_projects": "Проекты",
+        "nav_skills": "Навыки",
+        "nav_contact": "Контакты",
+        
+        "hero_tagline": "🚀 Студент AKHU • Frontend & Python Backend • Геймер",
+        "hero_title_1": "Космический",
+        "hero_title_accent_1": "Frontend & Backend",
+        "hero_title_2": "и Интерактивный",
+        "hero_title_accent_2": "3D Мир",
+        "hero_desc": "Студент университета Аль-Хорезми (AKHU). Разрабатываю эстетичные интерфейсы (Frontend 75%), серверную логику на Python/Flask, занимаюсь глубокой оптимизацией Windows и 3D-графикой.",
+        "btn_projects": "Смотреть проекты",
+        "btn_contact": "Связаться",
+
+        "about_heading": "Обо мне",
+        "about_sub": "Мой путь в инженерии, системная оптимизация и мир игр",
+        "about_p1": "Обучаюсь программной инженерии в Университете Аль-Хорезми (AKHU). Создаю эстетичные веб-интерфейсы на HTML/SCSS/JavaScript и высокопроизводительные веб-сервисы на Python и Flask.",
+        "about_p2": "Помимо веб-разработки, увлекаюсь тонким твикингом и оптимизацией Windows/Linux (low-latency). В свободное время погружаюсь в атмосферные игры и стратегические задачи.",
+        "gamer_title": "Игры и Системный фокус:",
+        
+        "projects_heading": "Избранные Проекты",
+        "projects_sub": "Практические проекты, созданные в процессе обучения",
+        
+        "skills_heading": "Навыки и Технологии",
+        "skills_sub": "Текущий уровень владения технологиями и инструментами",
+        
+        "contact_heading": "Связаться со мной",
+        "contact_sub": "Буду рад интересным проектам, предложениям и сотрудничеству",
+        "contact_email_label": "Электронная почта:",
+        "copy_email_btn": "Скопировать",
+        "copied_text": "Скопировано!",
+        "form_name": "Ваше имя",
+        "form_email": "Ваш Email",
+        "form_message": "Ваше сообщение",
+        "form_submit": "Отправить сообщение",
+        "source_code": "GitHub &rarr;",
+        "live_demo": "Демо &rarr;",
+        "footer_text": f"© 2026 Shohjahon • {MY_EMAIL} • AKHU Student Space Portfolio."
     },
     "en": {
         "brand_title": "Shohjahon",
-        "brand_ext": ".dev",
+        "brand_ext": ".space",
         "nav_about": "About",
         "nav_projects": "Projects",
         "nav_skills": "Skills",
         "nav_contact": "Contact",
         
-        # Hero
-        "hero_tagline": "⚡ AKHU Student • Frontend & Python Backend • Gamer",
-        "hero_title_1": "Modern",
+        "hero_tagline": "🚀 AKHU Student • Frontend & Python Backend • Gamer",
+        "hero_title_1": "Cosmic",
         "hero_title_accent_1": "Frontend & Backend",
         "hero_title_2": "& Interactive",
-        "hero_title_accent_2": "3D Graphics",
+        "hero_title_accent_2": "3D Universe",
         "hero_desc": "Software Engineering student at Al-Khwarizmi University (AKHU). Passionate about Frontend Development (75%), Python backend architectures, Windows system optimization, and 3D modeling.",
         "btn_projects": "Explore Projects",
         "btn_contact": "Get in Touch",
 
-        # About
         "about_heading": "About Me",
         "about_sub": "My engineering journey, system optimization passions, and gaming world",
-        "about_p1": "Currently studying at Al-Khwarizmi University (AKHU). I build clean, high-performance web interfaces with HTML/SCSS/JS alongside robust Python and Flask backend services.",
+        "about_p1": "Currently studying Software Engineering at Al-Khwarizmi University (AKHU). I build clean, high-performance web interfaces with HTML/SCSS/JS alongside robust Python and Flask backend services.",
         "about_p2": "Beyond web development, I am passionate about Windows low-latency optimization, OS debloating, and Linux environments. In my free time, I dive into immersive gaming.",
         "gamer_title": "Gaming & System Focus:",
         
-        # Projects
         "projects_heading": "Featured Projects",
         "projects_sub": "Practical applications built throughout my engineering path",
-        "filter_all": "All",
         
-        # Skills
         "skills_heading": "Skills & Technologies",
         "skills_sub": "Current proficiency breakdown across development and systems",
         
-        # Contact
         "contact_heading": "Get In Touch",
         "contact_sub": "Feel free to reach out for collaboration or inquiries",
+        "contact_email_label": "Email Address:",
+        "copy_email_btn": "Copy",
+        "copied_text": "Copied!",
         "form_name": "Your Name",
-        "form_email": "Email Address",
+        "form_email": "Your Email Address",
         "form_message": "Your Message",
         "form_submit": "Transmit Message",
         "source_code": "GitHub &rarr;",
         "live_demo": "Live Demo &rarr;",
-        "footer_text": "© 2026 Shohjahon • AKHU Student Portfolio. Powered by Python, Flask & SCSS."
+        "footer_text": f"© 2026 Shohjahon • {MY_EMAIL} • AKHU Student Space Portfolio."
     }
 }
 
@@ -137,7 +179,36 @@ PROJECTS_DATA: Dict[str, List[Project]] = {
             "title": "YouTube Media Platforma & UI",
             "category": "Frontend",
             "tech": ["HTML5", "SCSS", "JavaScript", "Responsive UI"],
-            "summary": "YouTube interfeysiga asoslangan, moslashuvchan video pleyer, to'rsimon (grid) katalog va zamonaviy dark-theme dizayni.",
+            "summary": "YouTube interfeysiga asoslangan, moslashuvchan video pleyer, to'rsimon (grid) katalog va zamonaviy kosmik dark-theme dizayni.",
+            "github": "https://github.com",
+            "live_demo": "#"
+        }
+    ],
+    "ru": [
+        {
+            "id": "flask-learning",
+            "title": "Архитектура Flask Backend & Sandbox",
+            "category": "Backend",
+            "tech": ["Python", "Flask", "Jinja2", "SQLite", "SCSS"],
+            "summary": "Серверная песочница, включающая маршрутизацию URL, шаблонизацию Jinja2, управление сессиями и CRUD операции с БД.",
+            "github": "https://github.com",
+            "live_demo": "#"
+        },
+        {
+            "id": "user-list",
+            "title": "Система Управления User-List",
+            "category": "Full-Stack",
+            "tech": ["Python", "Flask", "JavaScript", "SCSS"],
+            "summary": "Интерактивное веб-приложение для добавления, фильтрации, редактирования пользователей и структурирования данных.",
+            "github": "https://github.com",
+            "live_demo": "#"
+        },
+        {
+            "id": "youtube-project",
+            "title": "Медиа-Платформа YouTube UI",
+            "category": "Frontend",
+            "tech": ["HTML5", "SCSS", "JavaScript", "Responsive UI"],
+            "summary": "Адаптивный медиа-интерфейс в стиле YouTube с кастомными видеокомпонентами и оптимизированным дизайном.",
             "github": "https://github.com",
             "live_demo": "#"
         }
@@ -192,6 +263,24 @@ SKILLS_DATA: Dict[str, Dict[str, List[SkillItem]]] = {
             {"name": "Git & GitHub Versiya Nazorati", "level": 60},
         ]
     },
+    "ru": {
+        "Frontend и Веб-дизайн": [
+            {"name": "Frontend разработка (HTML/CSS/SCSS)", "level": 75},
+            {"name": "Адаптивный дизайн (Mobile-First)", "level": 75},
+            {"name": "JavaScript (ES6+)", "level": 45},
+            {"name": "Основы TypeScript", "level": 35},
+        ],
+        "Backend и 3D Графика": [
+            {"name": "Программирование на Python", "level": 55},
+            {"name": "Фреймворк Flask & REST API", "level": 55},
+            {"name": "3D Моделирование (Базовые объекты)", "level": 30},
+        ],
+        "Системы и Оптимизация": [
+            {"name": "Оптимизация и твикинг Windows", "level": 85},
+            {"name": "Linux (Arch / Ubuntu) и macOS", "level": 80},
+            {"name": "Контроль версий Git & GitHub", "level": 60},
+        ]
+    },
     "en": {
         "Frontend & Web UI": [
             {"name": "Frontend Development (HTML/CSS/SCSS)", "level": 75},
@@ -214,7 +303,7 @@ SKILLS_DATA: Dict[str, Dict[str, List[SkillItem]]] = {
 
 @app.route("/set-lang/<lang_code>")
 def set_language(lang_code: str) -> ResponseReturnValue:
-    if lang_code in ["uz", "en"]:
+    if lang_code in ["uz", "ru", "en"]:
         session["lang"] = lang_code
     return redirect(request.referrer or url_for("index"))
 
@@ -225,22 +314,30 @@ def index() -> ResponseReturnValue:
     projects: List[Project] = PROJECTS_DATA.get(lang, PROJECTS_DATA["uz"])
     skills: Dict[str, List[SkillItem]] = SKILLS_DATA.get(lang, SKILLS_DATA["uz"])
     
-    return render_template("index.html", t=t, current_lang=lang, projects=projects, skills=skills)
+    return render_template("index.html", t=t, current_lang=lang, my_email=MY_EMAIL, projects=projects, skills=skills)
 
 @app.route("/api/contact", methods=["POST"])
 def contact() -> ResponseReturnValue:
     data: Dict[str, Any] = request.get_json(silent=True) or {}
     name: str = str(data.get("name", "")).strip()
-    email: str = str(data.get("email", "")).strip()
+    sender_email: str = str(data.get("email", "")).strip()
     message: str = str(data.get("message", "")).strip()
 
     lang: str = str(session.get("lang", "uz"))
-    if not name or not email or not message:
-        err_msg = "Barcha maydonlarni to'ldiring." if lang == "uz" else "All fields are required."
-        return jsonify({"status": "error", "message": err_msg}), 400
+    if not name or not sender_email or not message:
+        err_msgs = {
+            "uz": "Barcha maydonlarni to'ldiring.",
+            "ru": "Пожалуйста, заполните все поля.",
+            "en": "All fields are required."
+        }
+        return jsonify({"status": "error", "message": err_msgs.get(lang, err_msgs["uz"])}), 400
 
-    ok_msg = f"Rahmat {name}, xabaringiz qabul qilindi!" if lang == "uz" else f"Thank you {name}, message received!"
-    return jsonify({"status": "success", "message": ok_msg})
+    ok_msgs = {
+        "uz": f"Rahmat {name}, xabaringiz qabul qilindi!",
+        "ru": f"Спасибо, {name}! Ваше сообщение отправлено.",
+        "en": f"Thank you {name}, your message has been sent!"
+    }
+    return jsonify({"status": "success", "message": ok_msgs.get(lang, ok_msgs["uz"])})
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)  
+    app.run(debug=True, host="0.0.0.0", port=5000)

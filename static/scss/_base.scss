@@ -13,7 +13,12 @@ html {
 }
 
 body {
-  background-color: $bg-primary;
+  background-color: $bg-space-dark;
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(168, 85, 247, 0.22) 0%, transparent 45%),
+    radial-gradient(circle at 85% 35%, rgba(217, 70, 239, 0.18) 0%, transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(56, 189, 248, 0.12) 0%, transparent 60%);
+  background-attachment: fixed;
   color: $text-primary;
   font-family: $font-sans;
   line-height: 1.6;
@@ -22,17 +27,17 @@ body {
 }
 
 a {
-  color: $accent-cyan;
+  color: $accent-purple;
   text-decoration: none;
   transition: $transition-smooth;
 
-  &:hover {
-    color: color.adjust($accent-cyan, $lightness: 15%);
+&:hover {
+  color: color.adjust($accent-magenta, $lightness: 10%);
   }
 }
 
 h1, h2, h3, h4 {
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.02em;
   color: $text-primary;
 }
@@ -43,9 +48,9 @@ h1, h2, h3, h4 {
 
 .glass-panel {
   background: $bg-card;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid $border-color;
   border-radius: $radius-md;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 40px rgba(8, 3, 24, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }

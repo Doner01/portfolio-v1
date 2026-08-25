@@ -13,23 +13,25 @@
 
 // Status Dot
 .status-indicator {
-  width: 8px;
-  height: 8px;
-  background-color: $accent-emerald;
+  width: 9px;
+  height: 9px;
+  background-color: $accent-star-yellow;
   border-radius: 50%;
-  box-shadow: 0 0 10px $accent-emerald;
+  box-shadow: 0 0 12px $accent-star-yellow;
   display: inline-block;
-  animation: pulse 2s infinite ease-in-out;
+  animation: pulse-space 2s infinite ease-in-out;
 }
 
-@keyframes pulse {
+@keyframes pulse-space {
   0%, 100% {
     opacity: 1;
     transform: scale(1);
+    box-shadow: 0 0 12px $accent-star-yellow;
   }
   50% {
-    opacity: 0.4;
+    opacity: 0.5;
     transform: scale(0.85);
+    box-shadow: 0 0 4px $accent-star-yellow;
   }
 }
 
@@ -38,9 +40,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid $border-color;
-  padding: 0.25rem 0.6rem;
+  padding: 0.25rem 0.65rem;
   border-radius: 20px;
   font-size: 0.78rem;
 
@@ -51,13 +53,14 @@
     transition: $transition-smooth;
 
     &.active {
-      color: $accent-cyan;
+      color: #ffffff;
       font-weight: 700;
-      background: rgba(6, 182, 212, 0.12);
+      background: linear-gradient(135deg, $accent-purple, $accent-magenta);
+      box-shadow: 0 0 10px $accent-purple-glow;
     }
 
     &:hover {
-      color: $text-primary;
+      color: #ffffff;
     }
   }
 
@@ -72,34 +75,34 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  padding: 0.8rem 1.6rem;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   border-radius: $radius-sm;
   cursor: pointer;
   transition: $transition-smooth;
   border: 1px solid transparent;
 
   &--primary {
-    background: linear-gradient(135deg, $accent-cyan, color.adjust($accent-cyan, $lightness: -15%));
-    color: #ffffff;
-    box-shadow: 0 4px 15px $accent-cyan-glow;
+    background: linear-gradient(135deg, $accent-star-yellow, color.adjust($accent-star-yellow, $lightness: -15%));    color: #11082c;
+    box-shadow: 0 4px 20px $accent-star-glow;
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(6, 182, 212, 0.6);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(250, 204, 21, 0.6);
     }
   }
 
   &--outline {
-    background: transparent;
-    color: $text-primary;
+    background: rgba(168, 85, 247, 0.1);
+    color: #ffffff;
     border-color: $border-color;
 
     &:hover {
-      border-color: $accent-cyan;
-      background: rgba(6, 182, 212, 0.08);
+      border-color: $accent-magenta;
+      background: rgba(217, 70, 239, 0.18);
       transform: translateY(-2px);
+      box-shadow: 0 6px 20px $accent-purple-glow;
     }
   }
 }
@@ -125,11 +128,11 @@
 }
 
 .card-tag {
-  background: rgba(6, 182, 212, 0.1);
-  border: 1px solid rgba(6, 182, 212, 0.2);
-  color: $accent-cyan;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  color: #e9d5ff;
   font-size: 0.75rem;
-  padding: 0.25rem 0.6rem;
+  padding: 0.25rem 0.65rem;
   border-radius: 20px;
 }
 
@@ -148,7 +151,7 @@
 .interest-item {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid $border-color;
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1rem;
   border-radius: $radius-sm;
   display: flex;
   align-items: center;
@@ -156,12 +159,14 @@
   transition: $transition-smooth;
 
   &:hover {
-    border-color: $accent-cyan;
+    border-color: $accent-magenta;
+    background: rgba(168, 85, 247, 0.08);
     transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
   }
 
   .interest-icon {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   strong {
@@ -171,19 +176,20 @@
   }
 
   small {
-    color: $text-muted;
+    color: $text-secondary;
     font-size: 0.72rem;
+    opacity: 0.85;
   }
 }
 
 // Project Cards
 .project-card {
   background: $bg-card;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid $border-color;
   border-radius: $radius-md;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 36px rgba(8, 3, 24, 0.5);
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
@@ -199,15 +205,16 @@
     left: 0;
     width: 4px;
     height: 100%;
-    background: $accent-cyan;
+    background: linear-gradient(180deg, $accent-purple, $accent-magenta);
     opacity: 0;
     transition: $transition-smooth;
   }
 
   &:hover {
+    background: $bg-card-hover;
     border-color: $border-hover;
     transform: translateY(-4px);
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 14px 40px rgba(168, 85, 247, 0.25);
 
     &::before {
       opacity: 1;
@@ -217,7 +224,7 @@
   &__badge {
     font-size: 0.75rem;
     font-family: $font-mono;
-    color: $accent-cyan;
+    color: $accent-star-yellow;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 0.5rem;
@@ -245,14 +252,14 @@
     display: flex;
     gap: 1rem;
     font-size: 0.88rem;
-    font-weight: 500;
+    font-weight: 600;
   }
 }
 
 .tag {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: $text-secondary;
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  color: #e9d5ff;
   font-family: $font-mono;
   font-size: 0.75rem;
   padding: 0.25rem 0.6rem;
@@ -261,7 +268,7 @@
 
 // Progress Bar
 .skill-item {
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
 
   &__meta {
     display: flex;
@@ -271,16 +278,16 @@
   }
 
   &__bar {
-    height: 6px;
+    height: 7px;
     background: rgba(255, 255, 255, 0.06);
-    border-radius: 3px;
+    border-radius: 4px;
     overflow: hidden;
   }
 
   &__fill {
     height: 100%;
-    background: linear-gradient(90deg, $accent-cyan, $accent-emerald);
-    border-radius: 3px;
+    background: linear-gradient(90deg, $accent-purple, $accent-magenta, $accent-star-yellow);
+    border-radius: 4px;
     transition: width 1s ease-in-out;
   }
 }

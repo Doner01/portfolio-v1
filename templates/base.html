@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shohjahon | AKHU • Frontend, Python &amp; 3D Portfolio</title>
+  <title>Shohjahon | Cosmic Space Portfolio</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -27,8 +27,11 @@
         <li><a href="#contact">{{ t.nav_contact }}</a></li>
       </ul>
 
+      <!-- 3 Tilli o'tkazgich -->
       <div class="lang-switcher mono">
         <a href="{{ url_for('set_language', lang_code='uz') }}" class="lang-btn {% if current_lang == 'uz' %}active{% endif %}">UZ</a>
+        <span class="divider">/</span>
+        <a href="{{ url_for('set_language', lang_code='ru') }}" class="lang-btn {% if current_lang == 'ru' %}active{% endif %}">RU</a>
         <span class="divider">/</span>
         <a href="{{ url_for('set_language', lang_code='en') }}" class="lang-btn {% if current_lang == 'en' %}active{% endif %}">EN</a>
       </div>
