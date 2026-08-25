@@ -1,4 +1,5 @@
 import os
+import json
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -24,7 +25,7 @@ class SkillItem(TypedDict):
     name: str
     level: int
 
-# UZ / RU / EN Matnlar va Tarjimalar
+# UZ / RU / EN Lug'ati
 TRANSLATIONS: Dict[str, Dict[str, str]] = {
     "uz": {
         "brand_title": "Shohjahon",
@@ -56,7 +57,7 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "skills_sub": "Hozirgi amaliy bilim va tajriba darajalarim",
         
         "contact_heading": "Aloqaga Chiqish",
-        "contact_sub": "Hamkorlik, taklif yoki loyihalar bo'lsa, xabar qoldiring",
+        "contact_sub": "Savollaringiz, taklif yoki loyihalar bo'lsa, xabar qoldiring",
         "contact_email_label": "Elektron pochta:",
         "copy_email_btn": "Nusxalash",
         "copied_text": "Nusxalandi!",
@@ -305,7 +306,7 @@ SKILLS_DATA: Dict[str, Dict[str, List[SkillItem]]] = {
 def set_language(lang_code: str) -> ResponseReturnValue:
     if lang_code in ["uz", "ru", "en"]:
         session["lang"] = lang_code
-    return redirect(request.referrer or url_for("index"))
+    return jsonify({"status": "success", "lang": lang_code})
 
 @app.route("/")
 def index() -> ResponseReturnValue:
@@ -314,7 +315,17 @@ def index() -> ResponseReturnValue:
     projects: List[Project] = PROJECTS_DATA.get(lang, PROJECTS_DATA["uz"])
     skills: Dict[str, List[SkillItem]] = SKILLS_DATA.get(lang, SKILLS_DATA["uz"])
     
-    return render_template("index.html", t=t, current_lang=lang, my_email=MY_EMAIL, projects=projects, skills=skills)
+    return render_template(
+        "index.html",
+        t=t,
+        current_lang=lang,
+        my_email=MY_EMAIL,
+        projects=projects,
+        skills=skills,
+        translations_json=json.dumps(TRANSLATIONS),
+        projects_json=json.dumps(PROJECTS_DATA),
+        skills_json=json.dumps(SKILLS_DATA)
+    )
 
 @app.route("/api/contact", methods=["POST"])
 def contact() -> ResponseReturnValue:
@@ -332,10 +343,30 @@ def contact() -> ResponseReturnValue:
         }
         return jsonify({"status": "error", "message": err_msgs.get(lang, err_msgs["uz"])}), 400
 
+    # Gmail SMTP orqali user.doner2006@gmail.com ga yuborish
+    smtp_user = os.getenv("GMAIL_USER", MY_EMAIL)
+    smtp_pass = os.getenv("GMAIL_APP_PASSWORD") # Google App Password
+
+    if smtp_pass:
+        try:
+            msg = MIMEMultipart()
+            msg["From"] = smtp_user
+            msg["To"] = MY_EMAIL
+            msg["Subject"] = f"🚀 Portfolio Yangi Xabar: {name}"
+            
+            body_content = f"Ism: {name}\nEmail: {sender_email}\n\nXabar:\n{message}"
+            msg.attach(MIMEText(body_content, "plain", "utf-8"))
+
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+                server.login(smtp_user, smtp_pass)
+                server.send_message(msg)
+        except Exception as e:
+            print(f"Gmail SMTP yuborishda xatolik: {e}")
+
     ok_msgs = {
-        "uz": f"Rahmat {name}, xabaringiz qabul qilindi!",
-        "ru": f"Спасибо, {name}! Ваше сообщение отправлено.",
-        "en": f"Thank you {name}, your message has been sent!"
+        "uz": f"Rahmat {name}, xabaringiz {MY_EMAIL} ga yetkazildi!",
+        "ru": f"Спасибо, {name}! Ваше сообщение отправлено на {MY_EMAIL}.",
+        "en": f"Thank you {name}, your message has been sent to {MY_EMAIL}!"
     }
     return jsonify({"status": "success", "message": ok_msgs.get(lang, ok_msgs["uz"])})
 
