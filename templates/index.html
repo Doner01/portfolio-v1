@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section (Three.js 3D fon) -->
+<header id="hero" class="hero">
+  <div id="three-canvas-container" class="canvas-container"></div>
+  <div class="container">
+    <div class="hero__content">
+      <span class="hero__tagline mono">{{ t.hero_tagline }}</span>
+      <h1 class="hero__title">
+        {{ t.hero_title_1 }} <span class="gradient-text">{{ t.hero_title_accent_1 }}</span> {{ t.hero_title_2 }} <span class="gradient-text">{{ t.hero_title_accent_2 }}</span>.
+      </h1>
+      <p class="hero__desc">
+        {{ t.hero_desc }}
+      </p>
+      <div class="hero__actions">
+        <a href="#projects" class="btn btn--primary">{{ t.btn_projects }}</a>
+        <a href="#contact" class="btn btn--outline mono">{{ t.btn_contact }}</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Projects Section -->
+<section id="projects" class="section">
+  <div class="container">
+    <div class="section__header">
+      <h2>{{ t.projects_heading }}</h2>
+      <p>{{ t.projects_sub }}</p>
+    </div>
+    <div class="grid grid--projects">
+      {% for project in projects %}
+      <article class="project-card">
+        <div>
+          <div class="project-card__badge">{{ project.category }}</div>
+          <h3 class="project-card__title">{{ project.title }}</h3>
+          <p class="project-card__summary">{{ project.summary }}</p>
+        </div>
+        <div>
+          <div class="project-card__tags">
+            {% for tech in project.tech %}
+            <span class="tag">{{ tech }}</span>
+            {% endfor %}
+          </div>
+          <div class="project-card__links">
+            <a href="{{ project.github }}" target="_blank">{{ t.source_code | safe }}</a>
+            <a href="{{ project.live_demo }}">{{ t.live_demo | safe }}</a>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="section">
+  <div class="container">
+    <div class="section__header">
+      <h2>{{ t.skills_heading }}</h2>
+      <p>{{ t.skills_sub }}</p>
+    </div>
+    <div class="grid grid--skills">
+      {% for category, items in skills.items() %}
+      <div class="glass-panel" style="padding: 1.75rem;">
+        <h3 style="margin-bottom: 1.5rem; font-size: 1.15rem; color: #06b6d4;">{{ category }}</h3>
+        {% for skill in items %}
+        <div class="skill-item">
+          <div class="skill-item__meta">
+            <span>{{ skill.name }}</span>
+            <span class="mono" style="color: #9ca3af;">{{ skill.level }}%</span>
+          </div>
+          <div class="skill-item__bar">
+            <div class="skill-item__fill" style="width: {{ skill.level }}%;"></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section">
+  <div class="container" style="max-width: 650px;">
+    <div class="section__header">
+      <h2>{{ t.contact_heading }}</h2>
+      <p>{{ t.contact_sub }}</p>
+    </div>
+    <form id="contact-form" class="glass-panel" style="padding: 2rem; display: flex; flex-direction: column; gap: 1.25rem;">
+      <div>
+        <label class="mono" style="display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: #9ca3af;">{{ t.form_name }}</label>
+        <input type="text" id="name" required style="width: 100%; background: #06090e; border: 1px solid rgba(255,255,255,0.08); color: #fff; padding: 0.75rem; border-radius: 6px;">
+      </div>
+      <div>
+        <label class="mono" style="display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: #9ca3af;">{{ t.form_email }}</label>
+        <input type="email" id="email" required style="width: 100%; background: #06090e; border: 1px solid rgba(255,255,255,0.08); color: #fff; padding: 0.75rem; border-radius: 6px;">
+      </div>
+      <div>
+        <label class="mono" style="display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: #9ca3af;">{{ t.form_message }}</label>
+        <textarea id="message" rows="4" required style="width: 100%; background: #06090e; border: 1px solid rgba(255,255,255,0.08); color: #fff; padding: 0.75rem; border-radius: 6px; resize: vertical;"></textarea>
+      </div>
+      <button type="submit" class="btn btn--primary" style="justify-content: center;">{{ t.form_submit }}</button>
+      <div id="contact-status" class="mono" style="font-size: 0.85rem; text-align: center;"></div>
+    </form>
+  </div>
+</section>
+{% endblock %}
