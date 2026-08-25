@@ -35,17 +35,17 @@
   }
 }
 
-// Language Switcher (Oq to'rtburchaklar tozalandi)
+// Language Switcher (Katta va qulay)
 .lang-switcher {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid $border-color;
-  padding: 0.25rem 0.5rem;
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(192, 132, 252, 0.3);
+  padding: 0.35rem 0.8rem;
+  border-radius: 25px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
   .lang-btn {
     background: transparent !important;
@@ -55,28 +55,28 @@
     cursor: pointer;
     color: $text-secondary;
     font-family: $font-mono;
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 0.25rem 0.6rem;
-    border-radius: 12px;
+    font-size: 0.95rem; /* Katta harflar */
+    font-weight: 700;
+    padding: 0.3rem 0.75rem;
+    border-radius: 14px;
     transition: $transition-smooth;
 
     &:hover {
       color: #ffffff;
-      background: rgba(255, 255, 255, 0.08) !important;
+      background: rgba(255, 255, 255, 0.1) !important;
     }
 
     &.active {
       color: #ffffff !important;
-      font-weight: 700;
+      font-weight: 800;
       background: linear-gradient(135deg, $accent-stolas-pink, $accent-nebula-purple) !important;
-      box-shadow: 0 0 12px rgba(244, 114, 182, 0.5) !important;
+      box-shadow: 0 0 14px rgba(244, 114, 182, 0.6) !important;
     }
   }
 
   .divider {
     color: $text-muted;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
   }
 }
 

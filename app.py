@@ -26,11 +26,10 @@ class SkillItem(TypedDict):
     name: str
     level: int
 
-# UZ / RU / EN Lug'ati
 TRANSLATIONS: Dict[str, Dict[str, str]] = {
     "uz": {
-        "brand_title": "Ulug'bekov",
-        "brand_ext": ".space",
+        "brand_title": "",
+        "brand_ext": "SPACE",
         "nav_about": "Haqimda",
         "nav_projects": "Loyihalar",
         "nav_skills": "Ko'nikmalar",
@@ -71,8 +70,8 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "footer_text": f"© 2026 {AUTHOR_NAME} • {MY_EMAIL} • AKHU Student Space Portfolio."
     },
     "ru": {
-        "brand_title": "Ulug'bekov",
-        "brand_ext": ".space",
+        "brand_title": "",
+        "brand_ext": "SPACE",
         "nav_about": "Обо мне",
         "nav_projects": "Проекты",
         "nav_skills": "Навыки",
@@ -81,9 +80,9 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "hero_tagline": f"🚀 Студент AKHU • {AUTHOR_NAME} • Геймер",
         "hero_title_1": "Космический",
         "hero_title_accent_1": "Frontend & Backend",
-        "hero_title_2": "и Интерактивный",
-        "hero_title_accent_2": "3D Мир",
-        "hero_desc": f"Меня зовут {AUTHOR_NAME}, я студент Университета Аль-Хорезми (AKHU). Разрабатываю интерфейсы (Frontend 75%), серверную логику на Python/Flask, занимаюсь глубокой оптимизацией Windows и 3D-графикой.",
+        "hero_title_2": "и 3D",
+        "hero_title_accent_2": "Вселенная",
+        "hero_desc": f"Меня зовут {AUTHOR_NAME}, студент Университета Аль-Хорезми (AKHU). Разрабатываю Frontend (75%), Python backend сервисы, оптимизирую Windows и создаю 3D графику.",
         "btn_projects": "Смотреть проекты",
         "btn_contact": "Связаться",
 
@@ -113,8 +112,8 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "footer_text": f"© 2026 {AUTHOR_NAME} • {MY_EMAIL} • AKHU Student Space Portfolio."
     },
     "en": {
-        "brand_title": "Ulug'bekov",
-        "brand_ext": ".space",
+        "brand_title": "",
+        "brand_ext": "SPACE",
         "nav_about": "About",
         "nav_projects": "Projects",
         "nav_skills": "Skills",
@@ -156,7 +155,6 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
     }
 }
 
-# Loyihalar havolalari
 PROJECTS_DATA: Dict[str, List[Project]] = {
     "uz": [
         {
@@ -372,4 +370,4 @@ def contact() -> ResponseReturnValue:
     return jsonify({"status": "success", "message": ok_msgs.get(lang, ok_msgs["uz"])})
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(debug=True, host="0.0.0.0", port=5001)
