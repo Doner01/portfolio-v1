@@ -176,15 +176,16 @@ PROJECTS_DATA: Dict[str, List[Project]] = {
             "live_demo": "#"
         },
         {
-            "id": "youtube-project",
-            "title": "YouTube Media Platforma & UI",
-            "category": "Frontend",
-            "tech": ["HTML5", "SCSS", "JavaScript", "Responsive UI"],
-            "summary": "YouTube interfeysiga asoslangan, moslashuvchan video pleyer, to'rsimon (grid) katalog va zamonaviy kosmik dark-theme dizayni.",
-            "github": "https://github.com/Doner01/youtube",
-            "live_demo": "#"
+            "id": "catrank",
+            "title": "CatRank — Mushuklar Ovoz Berish Platformasi",
+            "category": "Full-Stack",
+            "tech": ["Python", "Flask", "JavaScript", "Supabase", "HTML", "CSS"],
+            "summary": "Foydalanuvchilar mushuk rasmlarini yuklashi, ularga ovoz berishi, komment yozishi, profil rasmini o'zgartirishi va leaderboard orqali eng mashhur mushuklarni ko'rishi mumkin bo'lgan interaktiv platforma.",
+            "github": "https://github.com/Doner01/cats_beta",
+            "live_demo": "https://cats.octov.uz/"
         }
     ],
+
     "ru": [
         {
             "id": "flask-learning",
@@ -205,15 +206,16 @@ PROJECTS_DATA: Dict[str, List[Project]] = {
             "live_demo": "#"
         },
         {
-            "id": "youtube-project",
-            "title": "Медиа-Платформа YouTube UI",
-            "category": "Frontend",
-            "tech": ["HTML5", "SCSS", "JavaScript", "Responsive UI"],
-            "summary": "Адаптивный медиа-интерфейс в стиле YouTube с кастомными видеокомпонентами и оптимизированным дизайном.",
-            "github": "https://github.com/Doner01/youtube",
-            "live_demo": "#"
+            "id": "catrank",
+            "title": "CatRank — Платформа для голосования за котов",
+            "category": "Full-Stack",
+            "tech": ["Python", "Flask", "JavaScript", "Supabase", "HTML", "CSS"],
+            "summary": "Интерактивная платформа, где пользователи могут загружать фотографии котов, голосовать, оставлять комментарии, менять аватар профиля и просматривать рейтинг самых популярных котов.",
+            "github": "https://github.com/Doner01/cats_beta",
+            "live_demo": "https://cats.octov.uz/"
         }
     ],
+
     "en": [
         {
             "id": "flask-learning",
@@ -234,13 +236,13 @@ PROJECTS_DATA: Dict[str, List[Project]] = {
             "live_demo": "#"
         },
         {
-            "id": "youtube-project",
-            "title": "YouTube Media Interface & Player",
-            "category": "Frontend",
-            "tech": ["HTML5", "SCSS", "JavaScript", "Responsive UI"],
-            "summary": "Responsive media layout inspired by YouTube, featuring custom video components, dynamic sidebar, and optimized styling.",
-            "github": "https://github.com/Doner01/youtube",
-            "live_demo": "#"
+            "id": "catrank",
+            "title": "CatRank — Cat Voting & Ranking Platform",
+            "category": "Full-Stack",
+            "tech": ["Python", "Flask", "JavaScript", "Supabase", "HTML", "CSS"],
+            "summary": "Interactive community platform where users can upload cat photos, vote for cats, post comments, change profile pictures, and compete on a community leaderboard.",
+            "github": "https://github.com/Doner01/cats_beta",
+            "live_demo": "https://cats.octov.uz/"
         }
     ]
 }
